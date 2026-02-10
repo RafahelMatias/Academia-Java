@@ -36,14 +36,16 @@ This project demonstrates a "Building from Scratch" approach to understand the c
 The application uses a normalized relational database designed to minimize redundancy.
 
 * **Key Tables:** `Aluno` (Member), `Pagamento` (Payment), `Treino` (Workout), `Funcionario` (Staff).
-* **Optimization:** Custom SQL queries optimized for reporting views using `JOINs` to aggregate data efficiently.
+* **Optimization:** The system uses advanced Set Operations (`EXCEPT`) to identify defaulters efficiently, avoiding heavy application-side filtering.
 
 ```sql
--- Example of the underlying SQL logic designed for this system
-SELECT a.nome, p.data, p.valor 
-FROM Aluno a 
-JOIN Pagamento p ON a.id = p.aluno_id 
-WHERE p.status = 'PENDING';
+-- Real SQL logic used in AlunoDAO to find defaulters (Students WITHOUT Payments)
+SELECT idAluno, nome, email 
+FROM Aluno
+EXCEPT 
+SELECT A.idAluno, A.nome, A.email 
+FROM Aluno A 
+INNER JOIN Pagamento P ON A.idAluno = P.idAluno;
 ```
 
 ## 📸 Application Screenshots
