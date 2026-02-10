@@ -12,7 +12,7 @@ import java.sql.SQLException; // classe para tratamento de exceções
 public class ConFactory {
     public Connection getConnection() {
         try {
-            return DriverManager.getConnection("jdbc:mysql://localhost/dbacademia", "root", "Rafa2002");
+            return DriverManager.getConnection("jdbc:mysql://localhost/dbacademia", "root", "123");
         } catch (SQLException excecao) {
             throw new RuntimeException(excecao);
         }
